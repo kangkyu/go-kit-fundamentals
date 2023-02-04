@@ -10,11 +10,13 @@ type ProductRepo interface {
 	FetchDiscount(partner string) (discount float64, found bool)
 }
 
-var ErrInvalidPartner = errors.New("Invalid Partner Requested")
-var ErrPartnerNotFound = errors.New("Partner Not Found")
-var ErrInvalidCode = errors.New("Invalid Code Requested")
-var ErrCodeNotFound = errors.New("Code Not Found")
-var ErrInvalidQty = errors.New("Invalid Quantity Requested")
+var (
+	ErrInvalidPartner  = errors.New("Invalid Partner Requested")
+	ErrPartnerNotFound = errors.New("Partner Not Found")
+	ErrInvalidCode     = errors.New("Invalid Code Requested")
+	ErrCodeNotFound    = errors.New("Code Not Found")
+	ErrInvalidQty      = errors.New("Invalid Quantity Requested")
+)
 
 type service struct {
 	repo ProductRepo

@@ -115,3 +115,60 @@ func Test_MakeTotalRetailPriceHttpHandler(t *testing.T) {
 		assert.True(t, testResponse.Total == actualResponse.Total, "~2|Test #%d expected total: %.2f, not total %.2f~", id, testResponse.Total, actualResponse.Total)
 	}
 }
+
+func Test_TotalWholesalePriceRequest(t *testing.T) {
+	tests := []struct {
+		input    totalWholesalePriceRequest
+		expected totalWholesalePriceRequest
+	}{
+		{
+			input:    totalWholesalePriceRequest{Partner: "test", Code: "", Qty: 0},
+			expected: totalWholesalePriceRequest{Partner: "test", Code: "", Qty: 0},
+		},
+		{
+			input:    totalWholesalePriceRequest{Partner: "", Code: "test", Qty: 0},
+			expected: totalWholesalePriceRequest{Partner: "", Code: "test", Qty: 0},
+		},
+		{
+			input:    totalWholesalePriceRequest{Partner: "", Code: "", Qty: 12},
+			expected: totalWholesalePriceRequest{Partner: "", Code: "", Qty: 12},
+		},
+	}
+
+	for id, test := range tests {
+		data, _ := json.Marshal(test.input)
+
+		var actual totalWholesalePriceRequest
+		json.Unmarshal(data, &actual)
+
+		assert.True(t, test.expected.Partner == actual.Partner, "~2|Test #%d expected partner: %s, not partner %s~", id, test.expected.Partner, actual.Partner)
+		assert.True(t, test.expected.Code == actual.Code, "~2|Test #%d expected code: %s, not code %s~", id, test.expected.Code, actual.Code)
+		assert.True(t, test.expected.Qty == actual.Qty, "~2|Test #%d expected qty: %d, not qty %d~", id, test.expected.Qty, actual.Qty)
+	}
+}
+
+func Test_TotalWholesalePriceResponse(t *testing.T) {
+	tests := []struct {
+		input    totalWholesalePriceResponse
+		expected totalWholesalePriceResponse
+	}{
+		{
+			input:    totalWholesalePriceResponse{Total: 100.99},
+			expected: totalWholesalePriceResponse{Total: 100.99},
+		},
+		{
+			input:    totalWholesalePriceResponse{Total: 0.0, Err: "test"},
+			expected: totalWholesalePriceResponse{Total: 0.0, Err: "test"},
+		},
+	}
+
+	for id, test := range tests {
+		data, _ := json.Marshal(test.input)
+
+		var actual totalWholesalePriceResponse
+		json.Unmarshal(data, &actual)
+
+		assert.True(t, test.expected.Total == actual.Total, "~2|Test #%d expected total: %.2f, not total %.2f~", id, test.expected.Total, actual.Total)
+		assert.True(t, test.expected.Err == actual.Err, "~2|Test #%d expected err: %s, not err %s~", id, test.expected.Err, actual.Err)
+	}
+}
