@@ -35,6 +35,17 @@ type totalRetailPriceResponse struct {
 	Err   string  `json:"err,omitempty"`
 }
 
+type totalWholesalePriceRequest struct {
+	Partner string `json:"partner"`
+	Code    string `json:"code"`
+	Qty     int    `json:"qty"`
+}
+
+type totalWholesalePriceResponse struct {
+	Total float64 `json:"total"`
+	Err   string  `json:"err,omitempty"`
+}
+
 func MakeTotalRetailPriceHttpHandler(pricingService PricingService) *httptransport.Server {
 	return httptransport.NewServer(
 		MakeTotalRetailPriceEndpoint(pricingService),
