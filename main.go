@@ -28,10 +28,12 @@ func main() {
 
 	pricingService := NewPricingService(productRepo)
 	totalRetailPriceHandler := MakeTotalRetailPriceHttpHandler(pricingService)
+	totalWholesalePriceHandler := MakeTotalWholesalePriceHttpHandler(pricingService)
 
 	// use chi
 	rtr := chi.NewRouter()
 	rtr.Post("/retail", totalRetailPriceHandler.ServeHTTP)
+	rtr.Post("/wholesale", totalWholesalePriceHandler.ServeHTTP)
 
 	fmt.Println("Endpoints and handlers: Ready")
 
