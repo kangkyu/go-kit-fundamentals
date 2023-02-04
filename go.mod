@@ -1,4 +1,4 @@
-module github.com/kangkyu/go-kit-fundamentals/06
+module github.com/kangkyu/go-kit-fundamentals
 
 go 1.19
 

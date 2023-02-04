@@ -86,7 +86,7 @@ func main() {
 ```
 
 ```sh
-go build -o six .
-./six
+go build -o go .
+./go
 # Hosting on :8080
 ```
